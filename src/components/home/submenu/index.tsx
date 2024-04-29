@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import { X, Menu } from "lucide-react"
+import { ServiceProps } from '@/utils/model/home.type'
 
-export function Submenu() {
+export function Submenu( { services }: {services: ServiceProps[]}) {
+
+    console.log(services)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -42,12 +45,13 @@ export function Submenu() {
                     <button onClick={toggleMenu} className={styles.closeBtn}><X size={54} color='#121212'/></button>
                 )}
 
-                <li>
-                    <Link href="/post/pagina-1">Pagina 1
-                    </Link>
-                </li>
-                <li><Link href="/post/pagina-2">Pagina 2</Link></li>
-                <li><Link href="/post/pagina-3">Pagina 3</Link></li>
+
+                {services.map((service)=>(
+                    <li key={service.description}>
+                        <Link href="www.google.com">{service.description}
+                        </Link>
+                    </li>
+                ))}
             </ul>
         </section>
     )
