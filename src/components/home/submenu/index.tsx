@@ -5,10 +5,15 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { X, Menu } from "lucide-react"
 import { ServiceProps } from '@/utils/model/home.type'
+import { MenuProps } from '@/utils/model/menu.type';
 
-export function Submenu( { services }: {services: ServiceProps[]}) {
+interface SubMenuProp {
+    menu: MenuProps
+}
 
-    console.log(services)
+export function Submenu( { menu }: SubMenuProp) {
+
+    console.log(menu)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -46,9 +51,10 @@ export function Submenu( { services }: {services: ServiceProps[]}) {
                 )}
 
 
-                {services.map((service)=>(
-                    <li key={service.description}>
-                        <Link href="www.google.com">{service.description}
+                {menu.objects.map((item)=>(
+                    <li key={item.slug}>
+                        <Link href={`/post/${item.slug}`}>
+                            {item.title}
                         </Link>
                     </li>
                 ))}
